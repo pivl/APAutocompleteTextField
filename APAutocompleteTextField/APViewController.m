@@ -7,60 +7,53 @@
 //
 
 #import "APViewController.h"
-#import "APAutocompleteTextField.h"
+#import "APAutocompletion.h"
 
-@interface APViewController () <APAutocompleteTextFieldDelegate>
+@interface APViewController () <APAutocompletionDataSource, APAutocompletionDelegate, UITextFieldDelegate>
+@property (nonatomic, strong) IBOutlet UITextField *textField;
 @end
 
 @implementation APViewController {
-    APAutocompleteTextField *_textField;
+    APAutocompletion *_completion;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    CGFloat centerX = self.view.bounds.size.width/2.f;
-    CGFloat centerY = self.view.bounds.size.height/2.f;
+    self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.textField.spellCheckingType = UITextSpellCheckingTypeNo;
     
-    UILabel *info = [[UILabel alloc] initWithFrame:CGRectZero];
-    info.text = @"Input \'Soft Kitty\'";
-    [info sizeToFit];
-    info.center = CGPointMake(centerX, centerY/3.f);
-    [self.view addSubview:info];
-    
-	_textField = [[APAutocompleteTextField alloc] initWithFrame:CGRectMake(0.f, 0.f, 310.f, 40.f)];
-    _textField.delegate = self;
-    [_textField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
-    _textField.center = CGPointMake(centerX, centerY/2.f);
-    _textField.borderStyle = UITextBorderStyleRoundedRect;
-    [self.view addSubview:_textField];
-    
-    UIButton *buttonChangeAllText = [[UIButton alloc] initWithFrame:CGRectMake(0.f, 0.f, 150.f, 40.f)];
-    buttonChangeAllText.center = CGPointMake(centerX, centerY);
-    buttonChangeAllText.backgroundColor = [UIColor lightGrayColor];
-    [buttonChangeAllText setTitle:@"Change all" forState:UIControlStateNormal];
-    [buttonChangeAllText addTarget:self action:@selector(touchUpInsideButtonChangeAllText:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:buttonChangeAllText];
+    APAutocompletion *completion = [APAutocompletion new];
+    completion.textField = self.textField;
+    completion.dataSource = self;
+    completion.delegate = self;
+    _completion = completion;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"=> return pressed");
+    [self.textField unmarkText];
     return YES;
 }
 
-- (void)textFieldEditingChanged:(UITextField *)textField
-{
-    NSLog(@"=> entered text: %@", textField.text);
-}
-
-- (void)touchUpInsideButtonChangeAllText:(UIButton *)button
+- (IBAction)touchUpInsideButtonChangeAllText:(UIButton *)button
 {
     _textField.text = @"triam";
 }
 
-- (NSString *)autocompleteTextField:(APAutocompleteTextField *)textField completedStringForOriginString:(NSString *)originString
+- (IBAction)touchUpInsideButtonMarkedStyle:(id)sender
+{
+    self.textField.markedTextStyle = @{NSBackgroundColorAttributeName: [UIColor greenColor]};
+}
+
+- (void)autocompletion:(APAutocompletion *)autocompletion didChangeNotCompletedText:(NSString *)notCompletedText
+{
+    NSLog(@"=> entered text: %@", notCompletedText);
+}
+
+- (NSString *)autocompletion:(APAutocompletion *)autocompletion completedStringForOriginString:(NSString *)originString
 {
     NSString *completedString = @"Soft Kitty, Warm Kitty, little ball of fur";
     NSRange originStringRange = [completedString rangeOfString:originString];

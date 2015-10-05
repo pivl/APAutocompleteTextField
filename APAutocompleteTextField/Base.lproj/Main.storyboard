@@ -1,26 +1,84 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4451" systemVersion="13A461" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3676"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="APViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qe8-3J-1CB"/>
+                        <viewControllerLayoutGuide type="bottom" id="y7I-gt-V5L"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="txI-OA-zGH">
+                                <rect key="frame" x="16" y="57" width="288" height="32"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="yo8-4Q-qlw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="duJ-oJ-275"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTD-H2-cmq">
+                                <rect key="frame" x="16" y="97" width="86" height="34"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="contentEdgeInsets" minX="6" minY="8" maxX="6" maxY="8"/>
+                                <state key="normal" title="Change All"/>
+                                <connections>
+                                    <action selector="touchUpInsideButtonChangeAllText:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="sN6-Ks-0IF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5XJ-VJ-1HI">
+                                <rect key="frame" x="110" y="97" width="102" height="34"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="contentEdgeInsets" minX="6" minY="8" maxX="6" maxY="8"/>
+                                <state key="normal" title="Marked Style"/>
+                                <connections>
+                                    <action selector="touchUpInsideButtonMarkedStyle:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1V0-x1-R6T"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input 'Soft Kitty'" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Syc-2h-36S">
+                                <rect key="frame" x="99" y="28" width="123" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Syc-2h-36S" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="0e7-CK-ApL"/>
+                            <constraint firstItem="bTD-H2-cmq" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="1ib-Tw-x72"/>
+                            <constraint firstItem="txI-OA-zGH" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="7YN-na-McU"/>
+                            <constraint firstItem="txI-OA-zGH" firstAttribute="top" secondItem="Syc-2h-36S" secondAttribute="bottom" constant="8" symbolic="YES" id="CDH-S0-GxG"/>
+                            <constraint firstItem="5XJ-VJ-1HI" firstAttribute="leading" secondItem="bTD-H2-cmq" secondAttribute="trailing" constant="8" symbolic="YES" id="Keo-ek-htW"/>
+                            <constraint firstItem="txI-OA-zGH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="P1z-dN-PsR"/>
+                            <constraint firstItem="bTD-H2-cmq" firstAttribute="top" secondItem="txI-OA-zGH" secondAttribute="bottom" constant="8" symbolic="YES" id="ZOh-Wf-O6j"/>
+                            <constraint firstItem="5XJ-VJ-1HI" firstAttribute="top" secondItem="txI-OA-zGH" secondAttribute="bottom" constant="8" symbolic="YES" id="bYx-3x-8rD"/>
+                            <constraint firstItem="Syc-2h-36S" firstAttribute="top" secondItem="Qe8-3J-1CB" secondAttribute="bottom" constant="8" symbolic="YES" id="eOV-Cz-imJ"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="txI-OA-zGH" id="ifd-kX-NXC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="289" y="350"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
